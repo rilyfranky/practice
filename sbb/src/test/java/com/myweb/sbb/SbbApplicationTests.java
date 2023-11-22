@@ -2,6 +2,7 @@ package com.myweb.sbb;
 
 import com.myweb.sbb.question.Question;
 import com.myweb.sbb.question.QuestionRepository;
+import com.myweb.sbb.question.QuestionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,21 +13,14 @@ import java.time.LocalDateTime;
 class SbbApplicationTests {
 
 	@Autowired
-	private QuestionRepository questionRepository;
+	private QuestionService questionService;
 
 	@Test
-	void testJpa() {
-		Question q1 = new Question();
-		q1.setSubject("sbb 테스트");
-		q1.setContent("sbb 테스트 내용");
-		q1.setCreateDate(LocalDateTime.now());
-		this.questionRepository.save(q1);
-
-		Question q2 = new Question();
-		q2.setSubject("스프링부트 질문");
-		q2.setContent("질문입니다.");
-		q2.setCreateDate(LocalDateTime.now());
-		this.questionRepository.save(q2);
+	void testJpa(){
+		for (int i = 1; i <= 300; i++){
+			String subject = String.format("테스트 데이터 : [%03d]", i);
+			String content = "내용";
+			this.questionService.create(subject, content);
+		}
 	}
-
 }
