@@ -1,6 +1,7 @@
 package com.myweb.sbb.question;
 
 import com.myweb.sbb.answer.Answer;
+import com.myweb.sbb.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,4 +32,7 @@ public class Question {
     //질문 객체에서 답변을 참조하려면 question.getAnswerList()를 호출하면 됨
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
+
+    @ManyToOne
+    private SiteUser author;
 }
