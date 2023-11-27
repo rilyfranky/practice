@@ -22,12 +22,13 @@
         </thead>
         <tbody>
         <tr class="text-center" th:each="question, loop : ${paging}">
-            <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+            <td th:text="${paging.getTotalElements() - (paging.number * paging.size) - loop.index}"></td>
             <td class="text-start">
                 <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
-                <span class="text-danger small ms-2" th:if="${#lists.size(question.answerList) > 0}"
+                <span class="text-danger small ms-2"
+                      th:if="${#lists.size(question.answerList) > 0}"
                       th:text="${#lists.size(question.answerList)}">
-			        </span>
+                    </span>
             </td>
             <td><span th:if="${question.author != null}" th:text="${question.author.username}"></span></td>
             <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
@@ -72,9 +73,9 @@
         });
     });
     const btn_search = document.getElementById("btn_search");
-    btn_search.addEventListener('click', function() {
+    btn_search.addEventListener('click', function(){
         document.getElementById('kw').value = document.getElementById('search_kw').value;
-        document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+        document.getElementById('page').value = 0; // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
         document.getElementById('searchForm').submit();
     });
 </script>
